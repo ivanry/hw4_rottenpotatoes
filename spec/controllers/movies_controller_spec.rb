@@ -26,7 +26,7 @@ describe MoviesController do
 
     it 'should receive id and pass it to Movie finder' do
       Movie.should_receive(:find).with(@fake_id).and_return @movie1
-      Movie.should_receive(:find_by_director).with(@fake_director).and_return @fake_results
+      Movie.should_receive(:find_all_by_director).with(@fake_director).and_return @fake_results
 
       get :find_similar, {:id => @fake_id}
     end
@@ -38,7 +38,7 @@ describe MoviesController do
     end
     it 'should assign results to template variable' do
       Movie.stub(:find).and_return @movie1
-      Movie.stub(:find_by_director).and_return @fake_results
+      Movie.stub(:find_all_by_director).and_return @fake_results
 
       get :find_similar, {:id => @fake_id}
       assigns(:movies).should == @fake_results

@@ -24,7 +24,11 @@ module NavigationHelpers
       movie = Movie.find_by_title($1)
       movie_path(movie)
 
-    # Add more mappings here.
+    when /^the Similar Movies page for "([^"]*)"$/
+      movie = Movie.find_by_title($1)
+      similar_movies_path(:movies, :find_similar, movie.id)
+
+      # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #
     #   when /^(.*)'s profile page$/i

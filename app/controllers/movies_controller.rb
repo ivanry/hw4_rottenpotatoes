@@ -67,6 +67,13 @@ class MoviesController < ApplicationController
 
   def find_similar
     id = params[:id]
-    @movies = Movie.find_similar_by_id(id)
+    begin
+      @movies = Movie.find_similar_by_id(id)
+    rescue RuntimeError => e
+      logger.debug "e=#{e}"
+      flash[:notice] = e.message
+      redirect_to movies_path
+    end
+
   end
 end

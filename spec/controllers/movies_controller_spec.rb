@@ -16,7 +16,17 @@ describe MoviesController do
       @movie2 = mock('Movie')
       @movie2.stub(:id).and_return 2
       @movie2.stub(:director).and_return ''
-      @movie2.stub(:title).and_return 'Title1'
+      @movie2.stub(:title).and_return 'Title2'
+
+      @movie3 = mock('Movie')
+      @movie3.stub(:id).and_return 3
+      @movie3.stub(:title).and_return 'Title3'
+      @movie3.stub(:destroy)
+
+      @movie4 = mock('Movie')
+      @movie4.stub(:id).and_return 4
+      @movie4.stub(:title).and_return 'Title3'
+      @movie4.stub(:destroy)
     end
 
     it 'tests route' do
@@ -58,5 +68,22 @@ describe MoviesController do
       get :find_similar, {:id => @fake_id}
       response.should redirect_to(movies_path)
     end
+    it 'should delete movie' do
+      Movie.should_receive(:find).
+          and_return(@movie3)
+
+      delete :destroy, {:id => @fake_id}
+      response.should redirect_to(movies_path)
+
+    end
+    it 'should create movie' do
+      Movie.should_receive(:create!).
+          and_return(@movie4)
+
+      post :create, {:movie => @movie4}
+      response.should redirect_to(movies_path)
+
+    end
+
   end
 end

@@ -1,17 +1,7 @@
-%h1 Create New Movie
+-# new.html.haml using partial
 
-= form_tag movies_path do
+%h2 Create New Movie
 
-  = label :movie, :title, 'Title'
-  = text_field :movie, 'title'
-
-  = label :movie, :rating, 'Rating'
-  = select :movie, :rating, ['G','PG','PG-13','R','NC-17']
-
-  = label :movie, :release_date, 'Released On'
-  = date_select :movie, :release_date
-
-  = label :movie, :director, 'Director'
-  = text_field :movie, 'director'
-
+= form_tag movies_path, :method => :post do
+  = render :partial => 'movie_form'
   = submit_tag 'Save Changes'

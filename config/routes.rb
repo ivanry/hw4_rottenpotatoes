@@ -16,6 +16,11 @@ Rottenpotatoes::Application.routes.draw do
 
   #match '/movies/find_similar/:id'
   match '/:controller/:action/:id', :as => :similar_movies
+
+  get   '/login', :to => 'sessions#create', :as => :login
+  match '/auth/:provider/callback' => 'sessions#create'
+  match 'logout' => 'sessions#destroy'
+
   # Sample resource route with options:
   #   resources :products do
   #     member do

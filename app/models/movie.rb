@@ -12,6 +12,12 @@ class Movie < ActiveRecord::Base
   @@grandfathered_date = Date.parse('1 Jan 1930')
   def grandfathered? ; self.release_date >= @@grandfathered_date ; end
 
+  before_save :capitalize_title
+  def capitalize_title
+    self.title = self.title.split(/\s+/).map(&:downcase).
+        map(&:capitalize).join(' ')
+  end
+
   def self.all_ratings
     %w(G PG PG-13 NC-17 R)
   end

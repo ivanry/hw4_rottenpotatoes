@@ -1,4 +1,6 @@
 class Movie < ActiveRecord::Base
+  has_many :reviews
+
   RATINGS = %w[G PG PG-13 R NC-17]  #  %w[] shortcut for array of strings
   validates :title, :presence => true
   validates :release_date, :presence => true

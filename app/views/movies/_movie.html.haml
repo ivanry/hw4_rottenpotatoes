@@ -5,3 +5,4 @@
   %td= movie.rating
   %td= movie.release_date
   %td= link_to "More about #{movie.title}", movie_path(movie)
+  %td= link_to 'Add Review', new_movie_review_path(movie)

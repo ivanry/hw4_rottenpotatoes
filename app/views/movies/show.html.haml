@@ -19,3 +19,5 @@
 = link_to 'Back to movie list', movies_path
 %br
 = link_to 'Find Movies With Same Director', "find_similar/#{@movie.id}"
+%br
+= link_to 'Add Review', new_movie_review_path(@movie)
